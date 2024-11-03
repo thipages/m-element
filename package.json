@@ -1,6 +1,6 @@
 {
-  "name": "@titsoft/define-custom-element",
-  "version": "0.0.1",
+  "name": "@titsoft/define-parsed-element",
+  "version": "0.1.0",
   "description": "",
   "main": "src/index.js",
   "type": "module",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thipages/define-custom-element.git"
+    "url": "git+https://github.com/thipages/define-parsed-element.git"
   },
   "author": "Thierry Pagès",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/thipages/define-custom-element/issues"
+    "url": "https://github.com/thipages/define-parsed-element/issues"
   },
-  "homepage": "https://github.com/thipages/define-custom-element#readme",
+  "homepage": "https://github.com/thipages/define-parsed-element#readme",
   "dependencies": {
     "html-parsed-element": "^0.4.1"
   }

@@ -11,8 +11,8 @@
 </head>
 <body>
     <script type="module">
-        import parsedElement from './../src/index.js'
-        parsedElement('test-sync',{
+        import defineParsedElement from './../src/index.js'
+        defineParsedElement('test-sync',{
             init() {
                 this.innerHTML = 'Sync Ok'
             },
@@ -22,7 +22,7 @@
                 this.innerHTML = newValue
             }
         })
-        parsedElement('test-async',{
+        defineParsedElement('test-async',{
             async init() {
                 return new Promise(
                     resolve => {

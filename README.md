@@ -3,7 +3,7 @@
 Define custom-element based on [html-parsed-element](https://github.com/WebReflection/html-parsed-element). It provides
 - an unique connected/parsed call,
 - usage of a sync or an async `init` function called after `parsedCallback`,
-- attributes managemet through `attributes` and `attributeChange` functions,
+- attributes managemet through `attributes` and `attributeChanged` functions,
 - a `disconnected` function
 
 ## Usage

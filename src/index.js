@@ -15,8 +15,10 @@ export default function (name, config={}) {
             }
             connectedCallback() {
                 super.connectedCallback()
-                if (this.#connected) return
-                this.#connected = true
+                if (config.oneConnect) {
+                    if (this.#connected) return
+                    this.#connected = true
+                }
             }
             parsedCallback() {
                 this.init = config.init || noop

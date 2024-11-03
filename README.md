@@ -1,7 +1,7 @@
 # define-parsed-element
 
 Define custom-element based on [html-parsed-element](https://github.com/WebReflection/html-parsed-element). It provides in addition
-- an one-time parsedCallback call,
+- an one-time possible connectedCallback call with `oneConnect` initialization,
 - usage of a sync or an async `init` function called after `parsedCallback`,
 - a possible `level-up` attribute for replacing the *just created* custom-element by its children,
 - `attributes`,  `attributeChanged`, `disconnected` as shortcuts for `observedAttributes`,  `attributeChangedCallback`, `disconnectedCallback`
@@ -14,6 +14,7 @@ defineParsedElement('a-custom-element', {
     function init() {}, // or async function init()
     function attributeChanged(name, oldValue, newValue) {},
     function disconnected() {},
+    oneConnect: false, // default
     attributes: []
 })
 

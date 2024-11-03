@@ -13,9 +13,12 @@ export default function (name, config={}) {
             constructor() {
                 super()
             }
-            parsedCallback() {
+            connectedCallback() {
+                super.connectedCallback()
                 if (this.#connected) return
                 this.#connected = true
+            }
+            parsedCallback() {
                 this.init = config.init || noop
                 if (isAsyncFunction(this.init)) {
                     this.init().then (

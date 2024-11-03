@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test large content</title>
+    <script
+        data-imports="html-parsed-element"
+        src="https://esm.run/data-imports"
+    ></script>
+    <script type="module">
+        import defineParsedElement from './../../src/index.js'
+        const div = _ => `<div>${_}</div>`
+        const largeContent = Array(1000).fill('').map(
+                    (v, i) => {
+                        return div(
+                            Array(100).fill('').map(
+                                (v, j ) => div(i+"-"+j)
+                            ).join('')
+                        )
+                    }
+                ).join('')
+        
+        defineParsedElement('test-it',{
+            init() {
+                this.innerHTML = largeContent
+            }
+        })
+    </script>
+</head>
+<body>
+    <test-it level-up></test-it>
+</body>
+</html>

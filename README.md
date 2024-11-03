@@ -8,9 +8,9 @@ Define custom-element based on [html-parsed-element](https://github.com/WebRefle
 
 ## Usage
 ``` javascript
-import defineCustomElement from `@titsoft/define-custom-element`
+import defineParsedElement from `@titsoft/define-parsed-element`
 
-defineCustomElement(a-custom-element, {
+defineParsedElement(a-custom-element, {
     function init() {}, // or async function init()
     function attributeChanged(name, oldValue, newValue) {},
     function disconnected() {},

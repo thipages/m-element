@@ -6,11 +6,6 @@ const replace = (that) => {
         that.replaceWith(...that.children)
     }
 }
-const props = [
-    'init',
-    'attributeChangedCallback',
-    'disconnectedCallback'
-]
 export default function (name, config={}) {
     customElements.define(
         name, class extends HTMLParsedElement {
@@ -21,22 +16,26 @@ export default function (name, config={}) {
             parsedCallback() {
                 if (this.#connected) return
                 this.#connected = true
-                props.forEach(
-                    v => {
-                        if (config[v]) this[v] = config[v] || noop
-                    }
-                )
+                this.init = config.init || noop
                 if (isAsyncFunction(this.init)) {
-                    this.init(this).then (
+                    this.init().then (
                         () => replace(this)
                     )
                 } else {
-                    this.init(this)
+                    this.init()
                     replace(this)
                 }                    
             }
+            attributeChangedCallback(...args) {
+                const _ = config.attributeChangedCallback
+                if (_) _.call(this, ...args)
+            }
+            disconnectedCallback(...args) {
+                const _ = config.disconnectedCallback
+                if (_) _.call(this, ...args)
+            }
             static get observedAttributes () {
-                return config.observedAttributes() || []
+                return config.observedAttributes || []
             }
         }
     )

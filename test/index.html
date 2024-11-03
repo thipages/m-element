@@ -13,17 +13,22 @@
     <script type="module">
         import parsedElement from './../src/index.js'
         parsedElement('test-sync',{
-            init(that) {
-                that.innerHTML = 'Sync Ok'
+            init() {
+                this.innerHTML = 'Sync Ok'
+            },
+            observedAttributes : ['test'],
+            attributeChangedCallback(name, oldValue, newValue) {
+                console.log('attributeChangedCallback', this)
+                this.innerHTML = newValue
             }
         })
         parsedElement('test-async',{
-            async init(that) {
+            async init() {
                 return new Promise(
                     resolve => {
                         setTimeout(
                             () => {
-                                that.innerHTML = 'Async Ok'
+                                this.innerHTML = 'Async Ok'
                                 resolve()
                             }, 1000
                         )
@@ -31,9 +36,15 @@
                 )
             }
         })
+        setTimeout (
+            () => {
+                A.setAttribute('test', 'attributeChangedCallback ok')
+            }, 1000
+        )
     </script>
 </body>
-<test-sync></test-sync>
+<test-sync id="A" test=""></test-sync>
 <hr />
 <test-async></test-async>
+
 </html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test parsed-element</title>
+    <script
+    data-imports="html-parsed-element"
+    src="https://esm.run/data-imports"
+></script>
+</head>
+<body>
+    <script type="module">
+        import parsedElement from './../src/index.js'
+        parsedElement('test-sync',{
+            init(that) {
+                that.innerHTML = 'Sync Ok'
+            }
+        })
+        parsedElement('test-async',{
+            async init(that) {
+                return new Promise(
+                    resolve => {
+                        setTimeout(
+                            () => {
+                                that.innerHTML = 'Async Ok'
+                                resolve()
+                            }, 1000
+                        )
+                    }
+                )
+            }
+        })
+    </script>
+</body>
+<test-sync></test-sync>
+<hr />
+<test-async></test-async>
+</html>

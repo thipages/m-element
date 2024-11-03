@@ -27,15 +27,15 @@ export default function (name, config={}) {
                 }                    
             }
             attributeChangedCallback(...args) {
-                const _ = config.attributeChangedCallback
+                const _ = config.attributeChanged
                 if (_) _.call(this, ...args)
             }
             disconnectedCallback(...args) {
-                const _ = config.disconnectedCallback
+                const _ = config.disconnected
                 if (_) _.call(this, ...args)
             }
             static get observedAttributes () {
-                return config.observedAttributes || []
+                return config.attributes || []
             }
         }
     )

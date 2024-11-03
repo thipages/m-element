@@ -16,9 +16,8 @@
             init() {
                 this.innerHTML = 'Sync Ok'
             },
-            observedAttributes : ['test'],
-            attributeChangedCallback(name, oldValue, newValue) {
-                console.log('attributeChangedCallback', this)
+            attributes : ['test'],
+            attributeChanged(name, oldValue, newValue) {
                 this.innerHTML = newValue
             }
         })

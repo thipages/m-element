@@ -1,4 +1,4 @@
-# define-custom-element
+# define-parsed-element
 
 Define custom-element based on [html-parsed-element](https://github.com/WebReflection/html-parsed-element). It provides
 - an unique connected/parsed call,

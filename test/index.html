@@ -11,17 +11,13 @@
 </head>
 <body>
     <script type="module">
-        import defineParsedElement from './../src/index.js'
-        defineParsedElement('test-sync',{
+        import MElement from './../src/index.js'
+        customElements.define('test-sync', class extends MElement {
             init() {
                 this.innerHTML = 'Sync Ok'
-            },
-            attributes : ['test'],
-            attributeChanged(name, oldValue, newValue) {
-                this.innerHTML = newValue
             }
         })
-        defineParsedElement('test-async',{
+        customElements.define('test-async', class extends MElement {
             async init() {
                 return new Promise(
                     resolve => {

@@ -9,7 +9,7 @@
         src="https://esm.run/data-imports"
     ></script>
     <script type="module">
-        import defineParsedElement from './../../src/index.js'
+        import MElement from './../../src/index.js'
         const div = _ => `<div>${_}</div>`
         const largeContent = Array(1000).fill('').map(
                     (v, i) => {
@@ -21,7 +21,7 @@
                     }
                 ).join('')
         
-        defineParsedElement('test-it',{
+        customElements.define('test-it',class extends MElement {
             init() {
                 this.innerHTML = largeContent
             }

@@ -1,42 +1,43 @@
-# define-parsed-element
+# m-element
 
-Define custom-element based on [html-parsed-element](https://github.com/WebReflection/html-parsed-element). It provides in addition
-- an one-time possible connectedCallback call with `oneConnect` initialization,
-- usage of a sync or an async `init` function called after `parsedCallback`,
-- a possible `level-up` attribute for replacing the *just created* custom-element by its children,
-- `attributes`,  `attributeChanged`, `disconnected` as shortcuts for `observedAttributes`,  `attributeChangedCallback`, `disconnectedCallback`
+`MElement` class extends [HTMLParsedElement](https://github.com/WebReflection/html-parsed-element) with the following addition:
+- one constructor argument `oneConnect` (default false) which calls once `connectedCallback` when true,
+
+- an `init` function (sync or async) called after `parsedCallback`
+
+- a boolean `level-up` attribute allows replacing the *just created* custom-element by its children.
 
 ## Usage
 ``` javascript
-import defineParsedElement from `@titsoft/define-parsed-element`
+import MElement from `@titsoft/m-element`
 
-defineParsedElement('a-custom-element', {
-    function init() {}, // or async function init()
-    function attributeChanged(name, oldValue, newValue) {},
-    function disconnected() {},
-    oneConnect: false, // default
-    attributes: []
+customElements.define('a-custom-element', class extends MElement {
+    constructor () {
+        super() // oneConnect = false
+    }
+    // or async init() {}
+    init() {}
 })
 
 ```
-
 ### level-up attribute example
-
 ``` javascript
-import defineParsedElement from `@titsoft/define-parsed-element`
+import MElement from `@titsoft/m-element`
 
-defineParsedElement('a-custom-element', {
-    function init() {
+customElements.define('a-custom-element', class extends MElement {
+    constructor () {
+        super(true)
+    }
+    // or async init() {}
+    init() {
         this.innerHTML = `
             <div>I will replace my transient parent</div>
             <div>Me as well</div>
         `
     }
 })
-
 ```
-
 ```html
-<!-- finally, it will create the two divs -->
+<!-- finally, it will create the two divs only -->
 <a-custom-element level-up></a-custom-element>
 ```

@@ -7,14 +7,12 @@ const replace = (that) => {
 }
 export default class MElement extends HTMLParsedElement {
     #config
-    #alreadyParsed = false
     constructor(config = {}) {
         super()
         this.#config = config
     }
     connectedCallback() {
-        if (this.#alreadyParsed && this.#config.oneConnect) return
-        this.#alreadyParsed = true
+        if (this.parsed && this.#config.oneConnect) return
         super.connectedCallback()
     }
     parsedCallback() {

@@ -1,7 +1,7 @@
 {
   "name": "@titsoft/m-element",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.1.1",
+  "description": "HTMLParsedElement extension",
   "main": "src/index.js",
   "type": "module",
   "scripts": {

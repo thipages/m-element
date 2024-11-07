@@ -2,6 +2,7 @@ import HTMLParsedElement from 'html-parsed-element'
 const isAsyncFunction = fn => fn.constructor.name === 'AsyncFunction'
 const replace = (that) => {
     if (that.hasAttribute('level-up')) {
+        console.log('level')
         that.replaceWith(...that.children)
     }
 }
@@ -25,6 +26,8 @@ export default class MElement extends HTMLParsedElement {
                 this.init()
                 replace(this)
             } 
-        }                   
+        } else {
+            replace(this)
+        }                 
     }
 }

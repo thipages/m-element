@@ -3,43 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test define-parsed-element</title>
+    <title>Test data-map</title>
     <script
         data-imports="html-parsed-element"
         src="https://esm.run/data-imports"
     ></script>
+    <script type="module" src="index.js"></script>
 </head>
 <body>
-    <script type="module">
-        import MElement from './../src/index.js'
-        customElements.define('test-sync', class extends MElement {
-            init() {
-                this.innerHTML = 'Sync Ok'
-            }
-        })
-        customElements.define('test-async', class extends MElement {
-            async init() {
-                return new Promise(
-                    resolve => {
-                        setTimeout(
-                            () => {
-                                this.innerHTML = 'Async Ok'
-                                resolve()
-                            }, 1000
-                        )
-                    }
-                )
-            }
-        })
-        setTimeout (
-            () => {
-                A.setAttribute('test', 'attributeChangedCallback ok')
-            }, 1000
-        )
-    </script>
 </body>
-<test-sync id="A" test=""></test-sync>
+<h1>Results</h1>
+<div id="results"></div>
+<h1>output</h1>
+<test-sync id="A"></test-sync>
 <hr />
-<test-async></test-async>
-
+<test-async id="B"></test-async>
+<hr />
+<test-it id="C" level-up>
+    <div id="level-up"></div>
+</test-it>
 </html>

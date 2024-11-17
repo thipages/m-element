@@ -5,6 +5,7 @@
   - `{ onLoadHtml }` html used in async initialization (default ''),
 - an `init` function (sync or async) called by `parsedCallback`
 - a boolean `level-up` attribute for replacing the *just created* custom-element by its children.
+- a `content` method for getting the original `this.textContent`
 
 ## Usage
 ``` javascript

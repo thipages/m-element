@@ -3,9 +3,15 @@ const LEVEL_UP = 'level-up'
 const isAsyncFunction = fn => fn.constructor.name === 'AsyncFunction'
 export default class MElement extends HTMLParsedElement {
     #config
+    #textContent
     constructor(config) {
         super()
         this.#config = config || {}
+    }
+    content(remove=true) {
+        const _ = this.#textContent
+        if (remove) this.#textContent = null
+        return _
     }
     #finish (that) {
         if (that.hasAttribute(LEVEL_UP)) {
@@ -16,6 +22,7 @@ export default class MElement extends HTMLParsedElement {
     }
     parsedCallback() {
         const end = () => this.#finish(this)
+        this.#textContent = this.textContent
         this.innerHTML = this.#config.onLoadHtml || ''
         if (this.init) {
             if (isAsyncFunction(this.init)) {

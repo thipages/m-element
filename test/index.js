@@ -53,7 +53,8 @@ setTimeout(
             A0.children[0].tagName === "SPAN",
             A1.children[0].tagName === "SPAN",
             !document.getElementById('A2'),
-            !document.getElementById('A3')
+            !document.getElementById('A3'),
+            A4.content() === 'a content'
         ]
         addResults(tests)
     }, 1000

@@ -15,9 +15,17 @@
 <h1>Results</h1>
 <div id="results"></div>
 <h1>output</h1>
-<test-sync id="A"></test-sync>
-<test-async id="B"></test-async>
-<test-it id="C" level-up>
-    <div></div>
-</test-it>
+<!-- Basic sync test-->
+<test-sync id="A0"></test-sync>
+<!-- Basic async test-->
+<test-async id="A1"></test-async>
+<!-- sync test with level-up-->
+<test-sync id="A2" level-up></test-sync>
+<!-- async test with level-up -->
+<test-async id="A3" level-up delay="500"></test-async>
+
+<test-sync-empty level-up id="A4">
+    <test-it>E2</test-it>
+</test-sync-empty>
+
 </html>

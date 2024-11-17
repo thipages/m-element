@@ -1,33 +1,32 @@
 import HTMLParsedElement from 'html-parsed-element'
+const LEVEL_UP = 'level-up'
 const isAsyncFunction = fn => fn.constructor.name === 'AsyncFunction'
-const replace = (that) => {
-    if (that.hasAttribute('level-up')) {
-        console.log('level')
-        that.replaceWith(...that.children)
-    }
-}
 export default class MElement extends HTMLParsedElement {
     #config
-    constructor(config = {}) {
+    constructor(config) {
         super()
-        this.#config = config
+        this.#config = config || {}
     }
-    connectedCallback() {
-        if (this.parsed && this.#config.oneConnect) return
-        super.connectedCallback()
+    #finish (that) {
+        if (that.hasAttribute(LEVEL_UP)) {
+            that.replaceWith(...that.children)
+        }
+        that.dispatchEvent(new Event('load'))
+        that.lodaed = true
     }
     parsedCallback() {
+        const end = () => this.#finish(this)
+        this.innerHTML = this.#config.onLoadHtml || ''
         if (this.init) {
             if (isAsyncFunction(this.init)) {
-                this.init().then (
-                    () => replace(this)
-                )
+                this.init().then(end)
             } else {
                 this.init()
-                replace(this)
+                end()
             } 
         } else {
-            replace(this)
-        }                 
+            end()
+        }   
+              
     }
 }

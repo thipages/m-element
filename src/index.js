@@ -10,6 +10,7 @@ export default class MElement extends HTMLParsedElement {
     }
     #content(remove, textOnly) {
         const _ = this.#fragment
+        if (!_) return
         if (remove) this.#fragment = null
         return textOnly ?  _.textContent : _
     }

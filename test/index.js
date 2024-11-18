@@ -7,12 +7,12 @@ customElements.define('test-sync', class extends MElement {
         this.innerHTML = '<span></span>'
     }
 })
-customElements.define('test-sync-empty', class extends MElement {
+customElements.define('test-sync2', class extends MElement {
     constructor() {
         super()
     }
     init() {
-        
+        this.append(this.originalFragment())
     }
 })
 customElements.define('test-async', class extends MElement {
@@ -32,15 +32,6 @@ customElements.define('test-async', class extends MElement {
         )
     }
 })
-
-customElements.define('test-it', class extends MElement {
-    constructor() {
-        super( )
-    }
-    init() {
-        this.innerHTML = '<span>test-it</span>'
-    }
-})
 const num = 4
 const el = (id) => document.getElementById(id)
 Array(num).fill('').map((v, i)=>'A' + i).forEach (id => el(id).addEventListener('load', loaded))
@@ -54,7 +45,8 @@ setTimeout(
             A1.children[0].tagName === "SPAN",
             !document.getElementById('A2'),
             !document.getElementById('A3'),
-            A4.content() === 'a content'
+            A4.originalText() === 'a content',
+            A5.children.length === 2
         ]
         addResults(tests)
     }, 1000

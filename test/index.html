@@ -14,7 +14,9 @@
 </body>
 <h1>Results</h1>
 <div id="results"></div>
+
 <h1>output</h1>
+
 <!-- Basic sync test-->
 <test-sync id="A0"></test-sync>
 <!-- Basic async test-->
@@ -23,7 +25,12 @@
 <test-sync id="A2" level-up></test-sync>
 <!-- async test with level-up -->
 <test-async id="A3" level-up delay="500"></test-async>
-<!-- Retrieve content with content method -->
+<!-- Retrieve content with orginalContent method -->
 <test-sync id="A4">a content</test-sync>
+<!-- Retrieve content with originalFragment method -->
+<test-sync2 id="A5">
+    <span>original fragment</span>
+    <div></div>
+</test-sync2>
 
 </html>

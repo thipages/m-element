@@ -1,6 +1,7 @@
 import HTMLParsedElement from 'html-parsed-element'
 const LEVEL_UP = 'level-up'
 const LOADED = 'loaded'
+const ONERROR = 'onError'
 const isAsyncFunction = fn => fn.constructor.name === 'AsyncFunction'
 export default class MElement extends HTMLParsedElement {
     #config
@@ -8,6 +9,8 @@ export default class MElement extends HTMLParsedElement {
     constructor(config) {
         super()
         this.#config = config || {}
+        this[ONERROR] = false
+        this[LOADED] = false
     }
     #content(remove, textOnly) {
         const _ = this.#fragment
@@ -15,12 +18,12 @@ export default class MElement extends HTMLParsedElement {
         if (remove) this.#fragment = null
         return textOnly ?  _.textContent : _
     }
-    #finish (that) {
-        if (that.hasAttribute(LEVEL_UP)) {
-            that.replaceWith(...that.children)
+    #finish () {
+        if (this.hasAttribute(LEVEL_UP)) {
+            this.replaceWith(...this.children)
         }
-        that[LOADED] = true
-        that.dispatchEvent(new Event('load'))
+        this[LOADED] = true
+        this.dispatchEvent(new Event('load'))
     }
     originalFragment(remove = true) {
         return this.#content(remove, false)
@@ -29,7 +32,8 @@ export default class MElement extends HTMLParsedElement {
         return this.#content(remove, true)
     }
     parsedCallback() {
-        const end = () => this.#finish(this)
+        const that = this
+        const end = () => that.#finish()
         // move childNodes to a fragment
         this.#fragment = document.createDocumentFragment()
         this.#fragment.append(...this.childNodes)

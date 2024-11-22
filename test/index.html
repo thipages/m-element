@@ -18,17 +18,19 @@
 <h1>output</h1>
 
 <!-- Basic sync test-->
-<test-sync id="A0"></test-sync>
+<test-sync id="A1"></test-sync>
 <!-- Basic async test-->
-<test-async id="A1"></test-async>
+<test-async id="A2"></test-async>
 <!-- sync test with level-up-->
-<test-sync id="A2" level-up></test-sync>
+<test-sync id="A3" level-up></test-sync>
 <!-- async test with level-up -->
-<test-async id="A3" level-up delay="500"></test-async>
+<test-async id="A4" level-up delay="500"></test-async>
 <!-- Retrieve content with orginalContent method -->
-<test-sync id="A4">a content</test-sync>
+<test-sync id="A5">a content</test-sync>
+<error-async id="A6" delay="500">a content</error-async>
+
 <!-- Retrieve content with originalFragment method -->
-<test-sync2 id="A5">
+<test-sync2 id="A7">
     <span>original fragment</span>
     <div></div>
 </test-sync2>

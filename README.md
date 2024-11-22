@@ -3,6 +3,7 @@
 `MElement` class extends [HTMLParsedElement](https://github.com/WebReflection/html-parsed-element) with the following addition:
 - constructor argument
   - `{ onLoadHtml }` html string used in async initialization (default ''),
+  - `{ onErrorHtml }` html string used for async errors (default ''),
 - methods
   - `init()` (sync or async) called by `parsedCallback`
   - `originalText(remove)` for getting the original `textContent`,

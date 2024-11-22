@@ -1,9 +1,13 @@
 import HTMLParsedElement from 'html-parsed-element'
+// Atribute
 const LEVEL_UP = 'level-up'
+// load/error status
 const LOADED = 'loaded'
 const ON_ERROR = 'onError'
+// constructor config properties
 const ON_LOAD_HTML = 'onLoadHtml'
 const ON_ERROR_HTML = 'onErrorHtml'
+//
 const isAsyncFunction = fn => fn.constructor.name === 'AsyncFunction'
 export default class MElement extends HTMLParsedElement {
     #config

@@ -7,6 +7,8 @@ const ON_ERROR = 'onError'
 // constructor config properties
 const ON_LOAD_HTML = 'onLoadHtml'
 const ON_ERROR_HTML = 'onErrorHtml'
+// Error message for async init
+const ERROR = 'm-element error'
 //
 const isAsyncFunction = fn => fn.constructor.name === 'AsyncFunction'
 export default class MElement extends HTMLParsedElement {
@@ -56,7 +58,9 @@ export default class MElement extends HTMLParsedElement {
             if (isAsyncFunction(this.init)) {
                 this.init()
                     .then(() => end())
-                    .catch(end)
+                    .catch((e)=> {
+                        end(new Error(ERROR, {cause: e}))
+                    })
             } else {
                 this.init()
                 end()

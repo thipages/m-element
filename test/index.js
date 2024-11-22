@@ -40,6 +40,7 @@ customElements.define('error-async', class extends MElement {
         super({onErrorHtml: '<p style="color:red">on Error</p>'})
     }
     async init() {
+        this.style.display='block'
         return new Promise(
             (resolve, reject) => {
                 setTimeout(

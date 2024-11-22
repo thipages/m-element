@@ -27,11 +27,15 @@ export default class MElement extends HTMLParsedElement {
     #finish (error) {
         this[LOADED] = true
         this[ON_ERROR] = !!error
+        // Any errors will display onErrorHtml config property
+        if (this[ON_ERROR]) {
+            this.innerHTML = this.#config[ON_ERROR_HTML] || ''
+        }
         if (this.hasAttribute(LEVEL_UP)) {
             this.replaceWith(...this.children)
         }
+        // DEV: dispatchEvent runs after all changes
         this.dispatchEvent(new Event('load'))
-        if (this[ON_ERROR]) this.innerHTML = this.#config[ON_ERROR_HTML] || ''
     }
     originalFragment(remove = true) {
         return this.#content(remove, false)

@@ -1,7 +1,7 @@
 import HTMLParsedElement from 'html-parsed-element'
 const LEVEL_UP = 'level-up'
 const LOADED = 'loaded'
-const ONERROR = 'onError'
+const ON_ERROR = 'onError'
 const isAsyncFunction = fn => fn.constructor.name === 'AsyncFunction'
 export default class MElement extends HTMLParsedElement {
     #config
@@ -9,7 +9,7 @@ export default class MElement extends HTMLParsedElement {
     constructor(config) {
         super()
         this.#config = config || {}
-        this[ONERROR] = false
+        this[ON_ERROR] = false
         this[LOADED] = false
     }
     #content(remove, textOnly) {
@@ -20,7 +20,7 @@ export default class MElement extends HTMLParsedElement {
     }
     #finish (error) {
         this[LOADED] = true
-        this[ONERROR] = !!error
+        this[ON_ERROR] = !!error
         this.dispatchEvent(new Event('load'))
         if (this.hasAttribute(LEVEL_UP)) {
             this.replaceWith(...this.children)
@@ -43,18 +43,15 @@ export default class MElement extends HTMLParsedElement {
         // manage async/sync init function
         if (this.init) {
             if (isAsyncFunction(this.init)) {
-                this.init().then(end).catch(
-                    error => {
-                        this.#finish(error)
-                    }
-                )
+                this.init()
+                    .then(() => end())
+                    .catch(end)
             } else {
                 this.init()
                 end()
             } 
         } else {
             end()
-        }   
-              
+        } 
     }
 }

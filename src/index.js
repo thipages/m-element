@@ -18,12 +18,13 @@ export default class MElement extends HTMLParsedElement {
         if (remove) this.#fragment = null
         return textOnly ?  _.textContent : _
     }
-    #finish () {
+    #finish (error) {
+        this[LOADED] = true
+        this[ONERROR] = !!error
+        this.dispatchEvent(new Event('load'))
         if (this.hasAttribute(LEVEL_UP)) {
             this.replaceWith(...this.children)
         }
-        this[LOADED] = true
-        this.dispatchEvent(new Event('load'))
     }
     originalFragment(remove = true) {
         return this.#content(remove, false)
@@ -42,8 +43,11 @@ export default class MElement extends HTMLParsedElement {
         // manage async/sync init function
         if (this.init) {
             if (isAsyncFunction(this.init)) {
-                // TODO: error management with a onErrorHtml
-                this.init().then(end)
+                this.init().then(end).catch(
+                    error => {
+                        this.#finish(error)
+                    }
+                )
             } else {
                 this.init()
                 end()

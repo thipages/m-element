@@ -19,8 +19,8 @@ export default class MElement extends HTMLParsedElement {
         if (that.hasAttribute(LEVEL_UP)) {
             that.replaceWith(...that.children)
         }
-        that.dispatchEvent(new Event('load'))
         that[LOADED] = true
+        that.dispatchEvent(new Event('load'))
     }
     originalFragment(remove = true) {
         return this.#content(remove, false)

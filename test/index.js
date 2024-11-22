@@ -36,7 +36,7 @@ const num = 4
 const el = (id) => document.getElementById(id)
 Array(num).fill('').map((v, i)=>'A' + i).forEach (id => el(id).addEventListener('load', loaded))
 function loaded(e) {
-    console.log(e.target.tagName)
+    console.log(e.target.tagName, e.target.loaded)
 }
 setTimeout(
     () => {

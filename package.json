@@ -1,9 +1,19 @@
 {
   "name": "@titsoft/m-element",
-  "version": "0.7.0",
-  "description": "HTMLParsedElement extension",
+  "version": "0.8.0",
+  "description": "custom-element class with (a)sync loading, slots, error handling and level-up",
   "main": "src/index.js",
   "type": "module",
+  "keywords": [
+    "custom-elements",
+    "slots",
+    "asynchronous",
+    "synchronous",
+    "error handling",
+    "load event handling",
+    "life-cycle",
+    "level-up"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

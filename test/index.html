@@ -28,11 +28,13 @@
 <!-- Retrieve content with orginalContent method -->
 <test-sync id="A5">a content</test-sync>
 <error-async id="A6" delay="500">a content</error-async>
-
 <!-- Retrieve content with originalFragment method -->
 <test-sync2 id="A7">
     <span>original fragment</span>
     <div></div>
 </test-sync2>
-
+<!-- slots tests -->
+<test-sync id="A8">
+    <slot name="slot-test">slot content</slot>
+</test-sync>
 </html>

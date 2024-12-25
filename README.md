@@ -9,6 +9,7 @@
   - `originalText(remove)` for getting the original `textContent`,
   - `originalFragment(remove)` for getting the original `childNodes` appended to a document fragment,
     - `remove` argument to delete from memory the text or fragment (default : true),
+  - `getSlotByName(name)` to get all mamed slots present as custom-element children but removed and stored for later use,
 - events
   - `onload` triggers when async init finishes (sync init also)
 - attributes

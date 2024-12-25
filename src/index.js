@@ -14,6 +14,7 @@ const isAsyncFunction = fn => fn.constructor.name === 'AsyncFunction'
 export default class MElement extends HTMLParsedElement {
     #config
     #fragment
+    #slots
     constructor(config) {
         super()
         this.#config = config || {}
@@ -48,6 +49,9 @@ export default class MElement extends HTMLParsedElement {
     parsedCallback() {
         const that = this
         const end = (e) => that.#finish(e)
+        // slots removal and storage
+        this.#slots = this.querySelectorAll('slot')
+        this.#slots.forEach(e => e.remove())
         // move childNodes to a fragment
         this.#fragment = document.createDocumentFragment()
         this.#fragment.append(...this.childNodes)
@@ -68,5 +72,8 @@ export default class MElement extends HTMLParsedElement {
         } else {
             end()
         } 
+    }
+    getSlotByName(name) {
+        return [...this.#slots].filter(e => name && e.name === name) [0]
     }
 }

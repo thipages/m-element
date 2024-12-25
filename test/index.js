@@ -53,7 +53,7 @@ customElements.define('error-async', class extends MElement {
         )
     }
 })
-const num = 6
+const num = 7
 const el = (id) => document.getElementById(id)
 Array(num).fill('').map((v, i)=>'A' + (i+1)).forEach (id => el(id).addEventListener('load', loaded))
 let loadedCount = 0
@@ -71,7 +71,10 @@ function runTests() {
         !document.getElementById('A4'),
         A5.originalText() === 'a content',
         A6.onError = true,
-        A7.children.length === 2
+        A7.children.length === 2,
+        A8.getSlotByName('slot-test').textContent === 'slot content'
+        && A8.querySelectorAll('slot').length === 0
+        && A8.getSlotByName('slot-foo') === undefined
     ]
     addResults(tests)
 }

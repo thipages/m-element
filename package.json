@@ -1,9 +1,10 @@
 {
   "name": "@titsoft/m-element",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "custom-element class with (a)sync loading, slots, error handling and level-up",
   "main": "src/index.js",
   "type": "module",
+  "types": "src/types/index.d.ts",
   "keywords": [
     "custom-elements",
     "slots",
@@ -12,10 +13,15 @@
     "error handling",
     "load event handling",
     "life-cycle",
-    "level-up"
+    "level-up",
+    "mixins",
+    "composable"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test test/node/unit/*.test.js",
+    "test:unit": "node --test test/node/unit/*.test.js",
+    "test:browser": "open test/index.html",
+    "test:watch": "node --test --watch test/node/unit/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -29,5 +35,6 @@
   "homepage": "https://github.com/thipages/m-element#readme",
   "dependencies": {
     "html-parsed-element": "^0.4.1"
-  }
+  },
+  "devDependencies": {}
 }

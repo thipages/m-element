@@ -16,6 +16,7 @@ if (needsMock) {
       this.children = []
       this.childNodes = []
       this.attributes = {}
+      this._eventListeners = {}
     }
 
     getAttribute(name) {
@@ -52,9 +53,25 @@ if (needsMock) {
       // Mock replaceWith
     }
 
-    dispatchEvent() {
-      // Mock dispatchEvent
+    dispatchEvent(event) {
+      const listeners = this._eventListeners[event.type] || []
+      listeners.forEach(listener => listener(event))
       return true
+    }
+
+    addEventListener(type, listener) {
+      if (!this._eventListeners[type]) {
+        this._eventListeners[type] = []
+      }
+      this._eventListeners[type].push(listener)
+    }
+
+    removeEventListener(type, listener) {
+      if (!this._eventListeners[type]) return
+      const index = this._eventListeners[type].indexOf(listener)
+      if (index > -1) {
+        this._eventListeners[type].splice(index, 1)
+      }
     }
   }
 
@@ -95,6 +112,17 @@ if (needsMock) {
 
   // Export mock HTMLElement globally
   global.HTMLElement = MockHTMLElement
+  
+  // Mock Event if not available
+  if (typeof Event === 'undefined') {
+    global.Event = class {
+      constructor(type, options = {}) {
+        this.type = type
+        this.bubbles = options.bubbles || false
+        this.cancelable = options.cancelable || false
+      }
+    }
+  }
 }
 
 export { MockHTMLElement, MockDocumentFragment }

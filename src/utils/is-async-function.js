@@ -5,7 +5,6 @@
  * This approach handles:
  * - Regular async functions
  * - Async arrow functions
- * - Functions that return promises
  * - Edge cases with transpiled code
  * 
  * @param {Function} fn - The function to check
@@ -16,11 +15,6 @@ export function isAsyncFunction(fn) {
   
   // Check if it's an AsyncFunction
   if (fn.constructor && fn.constructor.name === 'AsyncFunction') {
-    return true
-  }
-  
-  // Additional check: does it have the [Symbol.toStringTag] === 'AsyncFunction'
-  if (fn[Symbol.toStringTag] === 'AsyncFunction') {
     return true
   }
   

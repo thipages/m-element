@@ -38,6 +38,10 @@ if (needsMock) {
     appendChild(child) {
       this.children.push(child)
       this.childNodes.push(child)
+      // Set parent relationship for more realistic DOM behavior
+      if (child && typeof child === 'object') {
+        child.parentElement = this
+      }
       return child
     }
 

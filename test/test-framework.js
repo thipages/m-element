@@ -242,6 +242,7 @@ export function printResults() {
 if (isNode) {
   // In Node.js, automatically print results after all test files are loaded
   // This uses a setTimeout to allow all imports to complete
+  // The 100ms delay ensures async tests have time to complete
   setTimeout(() => {
     if (testResults.length > 0) {
       printResults()

@@ -80,8 +80,8 @@ describe('AsyncInitMixin', () => {
     
     element.parsedCallback()
     
-    // Give more time for promises to resolve
-    await new Promise(resolve => setTimeout(resolve, 100))
+    // Give time for promises to resolve (using setTimeout to ensure microtasks complete)
+    await new Promise(resolve => setTimeout(resolve, 50))
     
     assertTrue(initCalled)
     assertTrue(eventFired)
@@ -99,8 +99,8 @@ describe('AsyncInitMixin', () => {
     
     element.parsedCallback()
     
-    // Give more time for promises to resolve and error handler to run
-    await new Promise(resolve => setTimeout(resolve, 100))
+    // Give time for promises to resolve and error handler to run
+    await new Promise(resolve => setTimeout(resolve, 50))
     
     assertTrue(eventFired)
     assertTrue(element.loaded)
@@ -150,7 +150,7 @@ describe('AsyncInitMixin', () => {
     assertEqual(element.innerHTML, '<p>Loading...</p>')
     
     // Wait for completion
-    await new Promise(resolve => setTimeout(resolve, 100))
+    await new Promise(resolve => setTimeout(resolve, 50))
   })
 
   it('should display error HTML on error', async () => {
@@ -163,7 +163,7 @@ describe('AsyncInitMixin', () => {
     element.parsedCallback()
     
     // Wait for async to complete
-    await new Promise(resolve => setTimeout(resolve, 100))
+    await new Promise(resolve => setTimeout(resolve, 50))
     
     assertEqual(element.innerHTML, '<p>Error!</p>')
   })
